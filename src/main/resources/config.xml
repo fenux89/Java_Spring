@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <bean id="myLogger" class="java.util.logging.Logger" factory-method="getLogger">
+        <constructor-arg type="java.lang.String" value="appLogger"/>
+    </bean>
+
+
+    <bean id="apartment" class="homework1.Apartment" >
+        <constructor-arg index="0" value="5"/>
+        <constructor-arg index="1" value="125.0"/>
+        <property name="floor" value="5"/>
+        <property name="television" ref="televisionMap" />
+        <property name="price" value="25000000" />
+
+    </bean>
+
+    <util:map id="televisionMap" scope="singleton" map-class="java.util.HashMap">
+        <entry key="key1" value-ref="television"/>
+        <entry key="key2" value-ref="television1"/>
+        <entry key="key3" value-ref="television2"/>
+
+    </util:map>
+
+    <bean id="television" class="homework1.Television" init-method="setInfo">
+            <property name="model" value="T90"/>
+            <property name="company" value="Sony"/>
+            <property name="price" value="1000"/>
+    </bean>
+
+    <bean id="television1" class="homework1.Television" init-method="setInfo">
+        <property name="model" value="T95"/>
+        <property name="company" value="Sony"/>
+        <property name="price" value="2000"/>
+    </bean>
+
+    <bean id="television2" class="homework1.Television" init-method="setInfo">
+        <property name="model" value="V100"/>
+        <property name="company" value="Haier"/>
+        <property name="price" value="1500"/>
+    </bean>
+
+</beans>
